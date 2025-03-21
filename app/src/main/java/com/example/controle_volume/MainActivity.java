@@ -9,7 +9,8 @@ import android.os.Bundle;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import android.widget.Switch;
+//import android.widget.Switch;
+import androidx.appcompat.widget.SwitchCompat;
 import android.widget.RadioGroup;
 import android.widget.RadioButton;
 import android.media.AudioManager;
@@ -19,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView alturaTextView;
     private SeekBar alturaSeekBar;
-    private Switch switchMute;
+    private SwitchCompat switchMute;
     private RadioGroup radioGroupMode;
     private AudioManager audioManager;
     private SharedPreferences sharedPreferences;
@@ -29,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Inicializa os componentes
         alturaTextView = findViewById(R.id.alturaTextView);
         alturaSeekBar = findViewById(R.id.alturaSeekBar);
         switchMute = findViewById(R.id.switchMute);
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         configurarSeekBar();
         configurarSwitch();
         configurarRadioGroup();
-        atualizarUI(); // Garante que a interface já começa sincronizada
+        atualizarUI();
     }
 
     /**
