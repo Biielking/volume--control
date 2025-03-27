@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
                 if (fromUser) {
                     audioManager.setStreamVolume(AudioManager.STREAM_RING, progress, AudioManager.FLAG_SHOW_UI);
                     switchMute.setChecked(progress == 0);
+                    Toast.makeText(MainActivity.this, "Volume alterado para: " + progress, Toast.LENGTH_SHORT).show();
                 }
                 alturaTextView.setText(String.valueOf(progress));
             }
@@ -104,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
                 int savedVolume = sharedPreferences.getInt("volume", audioManager.getStreamMaxVolume(AudioManager.STREAM_RING) / 2);
                 audioManager.setStreamVolume(AudioManager.STREAM_RING, savedVolume, AudioManager.FLAG_SHOW_UI);
                 alturaSeekBar.setProgress(savedVolume);
+                Toast.makeText(MainActivity.this, "Modo Mudo Desativado", Toast.LENGTH_SHORT).show();
             }
             salvarPreferencias("isMuted", isChecked);
         });
@@ -142,10 +144,16 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
                 startActivity(intent);
                 return;
-            }
-        }
 
+            }
+
+        }
         audioManager.setRingerMode(mode);
+
+        String mensagem = "Modo alterado para: " +
+                (mode == AudioManager.RINGER_MODE_SILENT ? "Silencioso" :
+                        mode == AudioManager.RINGER_MODE_VIBRATE ? "Vibrar" : "Som");
+        Toast.makeText(MainActivity.this, mensagem, Toast.LENGTH_SHORT).show();
         atualizarUI();
     }
 
